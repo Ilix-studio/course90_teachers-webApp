@@ -1,6 +1,8 @@
 import "../AuthPageCss/SignUp.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className='form-wrapper'>
@@ -141,7 +143,18 @@ const Signup = () => {
 
             <button className='button-submit'>Sign Up</button>
             <p className='p'>
-              Already have an account? <span className='span'>Sign In</span>
+              Already have an account?{" "}
+              <span
+                className='span'
+                onClick={() => navigate("/signin")}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  color: "blue",
+                }}
+              >
+                Sign In
+              </span>
             </p>
             <p className='p line'>Or With</p>
             <div className='flex-row'>

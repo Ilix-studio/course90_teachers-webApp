@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className='form-wrapper'>
@@ -12,38 +14,6 @@ const LoginPage = () => {
         </div>
         <div className='form-container'>
           <form className='form'>
-            <div className='flex-column'>
-              <label>Name </label>
-            </div>
-            <div className='inputForm'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                viewBox='0 0 64 64'
-                width='20'
-                height='20'
-              >
-                <circle
-                  cx='32'
-                  cy='20'
-                  r='12'
-                  fill='#b3cde0'
-                  stroke='#000'
-                  stroke-width='2'
-                />
-                <path
-                  d='M16,54 C16,44 24,38 32,38 C40,38 48,44 48,54'
-                  fill='#b3cde0'
-                  stroke='#000'
-                  stroke-width='2'
-                />
-              </svg>
-
-              <input
-                placeholder='Enter your name'
-                className='input'
-                type='text'
-              />
-            </div>
             <div className='flex-column'>
               <label>Email </label>
             </div>
@@ -137,9 +107,20 @@ const LoginPage = () => {
               />
             </div>
 
-            <button className='button-submit'>Sign Up</button>
+            <button className='button-submit'>Sign In</button>
             <p className='p'>
-              Already have an account? <span className='span'>Sign In</span>
+              Don't have an account?{" "}
+              <span
+                className='span'
+                onClick={() => navigate("/signup")}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  color: "blue",
+                }}
+              >
+                Sign Up
+              </span>
             </p>
             <p className='p line'>Or With</p>
             <div className='flex-row'>
