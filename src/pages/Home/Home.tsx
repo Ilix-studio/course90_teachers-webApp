@@ -1,8 +1,12 @@
+import "./Home.css";
+
 const Home = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <div>
+        <h2>Dashboard</h2>
+      </div>
+    </>
   );
 };
 
