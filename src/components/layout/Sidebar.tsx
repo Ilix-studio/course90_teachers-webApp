@@ -1,84 +1,148 @@
 import "./layoutStyles.css";
 import { Link } from "react-router-dom";
-import { IconLogout } from "@tabler/icons-react";
-import { IconUserCircle } from "@tabler/icons-react";
-import { IconHome2 } from "@tabler/icons-react";
-import { IconCheckupList } from "@tabler/icons-react";
-import { IconPencilQuestion } from "@tabler/icons-react";
-import { IconUserCheck } from "@tabler/icons-react";
-import { IconPaywall } from "@tabler/icons-react";
-import { IconBellPlus } from "@tabler/icons-react";
+import {
+  IconLogout,
+  IconUserCircle,
+  IconHome2,
+  IconCheckupList,
+  IconPencilQuestion,
+  IconUserCheck,
+  IconPaywall,
+  IconBellPlus,
+} from "@tabler/icons-react";
+import { useState } from "react";
 
-const Sidebar = () => {
+interface SidebarProps {
+  isVisible: boolean; // Receive the visibility state from the parent component
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isVisible }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const sidebarClass = isVisible ? "show-sidebar" : "";
+
+  // Links for the sidebar
+  const sidebarLinks = [
+    { name: "Dashboard", path: "/", icon: <IconHome2 stroke={2} /> },
+    {
+      name: "Create Question",
+      path: "/create-question",
+      icon: <IconPencilQuestion stroke={2} />,
+    },
+    {
+      name: "Questions Deck",
+      path: "/questions-deck",
+      icon: <IconCheckupList stroke={2} />,
+    },
+    { name: "Profile", path: "/profile", icon: <IconUserCircle stroke={2} /> },
+  ];
+
+  // Transaction and General sections
+  const transactionLinks = [
+    { name: "My Wallet", path: "/mywallet", icon: <IconPaywall stroke={2} /> },
+  ];
+
+  const generalLinks = [
+    {
+      name: "Notifications",
+      path: "/notifications",
+      icon: <IconBellPlus stroke={2} />,
+    },
+    { name: "Logout", path: "/logout", icon: <IconLogout stroke={2} /> },
+  ];
+
+  // Handle link click to set active state
+  const handleLinkClick = (index: number) => {
+    setActiveIndex(index);
+  };
+
   return (
-    <>
-      <div className='sidebar' id='sidebar'>
-        <nav className='sidebar__container'>
-          <div className='sidebar__logo'>
-            <img
-              src='assets/img/yt-logo.svg'
-              alt=''
-              className='sidebar__logo-img'
-            />
-            <img
-              src='assets/img/yt-logo-text.svg'
-              alt=''
-              className='sidebar__logo-text'
-            />
-          </div>
-          <div className='sidebar__content'>
-            <div className='sidebar__list'>
-              <Link to='/' className='sidebar__link active-link'>
-                <IconHome2 stroke={2} />
-                <span className='sidebar__link-name'>Dashboard</span>
-              </Link>
-              <Link to='/create-question' className='sidebar__link'>
-                <IconPencilQuestion stroke={2} />
-                <span className='sidebar__link-name'>Create Question</span>
-              </Link>
-              <Link to='/questions-deck' className='sidebar__link'>
-                <IconCheckupList stroke={2} />
-                <span className='sidebar__link-name'>Questions Deck</span>
-              </Link>
-              <Link to='/profile' className='sidebar__link'>
-                <IconUserCircle stroke={2} />
-                <span className='sidebar__link-name'>Profile</span>
-              </Link>
-            </div>
-            <h3 className='sidebar__title'>
-              <span>Transactions</span>
-            </h3>
-            <div className='sidebar__list'>
-              <Link to='/mywallet' className='sidebar__link'>
-                <IconPaywall stroke={2} />
-                <span className='sidebar__link-name'>My Wallet</span>
-              </Link>
-            </div>
-            <h3 className='sidebar__title'>
-              <span>General</span>
-            </h3>
-            <div className='sidebar__list'>
-              <Link to='/notifications' className='sidebar__link'>
-                <IconBellPlus stroke={2} />
-                <span className='sidebar__link-name'>Notifications</span>
-              </Link>
+    <div className={`sidebar ${sidebarClass}`} id='sidebar'>
+      <nav className='sidebar__container'>
+        {/* Sidebar Logo */}
 
-              <Link to='/logout' className='sidebar__link'>
-                <IconLogout stroke={2} />
-                <span className='sidebar__link-name'>Logout</span>
+        <div className='sidebar__logo'>
+          <h1 className='sidebar__logo-text'>Course90</h1>
+        </div>
+
+        {/* Sidebar Content */}
+        <div className='sidebar__content'>
+          {/* Main Links */}
+          <div className='sidebar__list'>
+            {sidebarLinks.map((link, index) => (
+              <Link
+                to={link.path}
+                key={index}
+                className={`sidebar__link ${
+                  activeIndex === index ? "active-link" : ""
+                }`}
+                onClick={() => handleLinkClick(index)}
+              >
+                {link.icon}
+                <span className='sidebar__link-name'>{link.name}</span>
               </Link>
-            </div>
+            ))}
           </div>
-          <div className='sidebar__account'>
-            <IconUserCheck stroke={2} />
-            <div className='sidebar__names'>
-              <h3 className='sidebar__name'>Ilix</h3>
-              <span className='sidebar__email'>ilixhazarika@email.com</span>
-            </div>
+
+          {/* Transactions Section */}
+          <h3 className='sidebar__title'>
+            <span>Transactions</span>
+          </h3>
+          <div className='sidebar__list'>
+            {transactionLinks.map((link, index) => (
+              <Link
+                to={link.path}
+                key={index + sidebarLinks.length}
+                className={`sidebar__link ${
+                  activeIndex === index + sidebarLinks.length
+                    ? "active-link"
+                    : ""
+                }`}
+                onClick={() => handleLinkClick(index + sidebarLinks.length)}
+              >
+                {link.icon}
+                <span className='sidebar__link-name'>{link.name}</span>
+              </Link>
+            ))}
           </div>
-        </nav>
-      </div>
-    </>
+
+          {/* General Section */}
+          <h3 className='sidebar__title'>
+            <span>General</span>
+          </h3>
+          <div className='sidebar__list'>
+            {generalLinks.map((link, index) => (
+              <Link
+                to={link.path}
+                key={index + sidebarLinks.length + transactionLinks.length}
+                className={`sidebar__link ${
+                  activeIndex ===
+                  index + sidebarLinks.length + transactionLinks.length
+                    ? "active-link"
+                    : ""
+                }`}
+                onClick={() =>
+                  handleLinkClick(
+                    index + sidebarLinks.length + transactionLinks.length
+                  )
+                }
+              >
+                {link.icon}
+                <span className='sidebar__link-name'>{link.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* User Account Info */}
+        <div className='sidebar__account'>
+          <IconUserCheck stroke={2} />
+          <div className='sidebar__names'>
+            <h3 className='sidebar__name'>Ilix</h3>
+            <span className='sidebar__email'>ilixhazarika@email.com</span>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 };
 
