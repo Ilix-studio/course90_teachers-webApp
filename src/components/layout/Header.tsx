@@ -1,6 +1,6 @@
 import "./layoutStyles.css";
 import { IconMenu } from "@tabler/icons-react";
-import { IconLogout } from "@tabler/icons-react";
+import logo from "../../assets/images/course90-logo.png";
 
 interface HeaderProps {
   toggleSidebar: () => void; // Add this prop to trigger the sidebar toggle
@@ -17,7 +17,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
           >
             <IconMenu stroke={2} />
           </div>
-          <IconLogout stroke={2} />
+          <img
+            src={logo}
+            alt='logo'
+            style={{ height: "48px", width: "180px" }}
+          />
         </div>
       </header>
     </>

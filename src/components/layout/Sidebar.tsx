@@ -6,7 +6,6 @@ import {
   IconHome2,
   IconCheckupList,
   IconPencilQuestion,
-  IconUserCheck,
   IconPaywall,
   IconBellPlus,
 } from "@tabler/icons-react";
@@ -59,10 +58,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible }) => {
     <div className={`sidebar ${sidebarClass}`} id='sidebar'>
       <nav className='sidebar__container'>
         {/* Sidebar Logo */}
-
-        <div className='sidebar__logo'>
-          <h1 className='sidebar__logo-text'>Course90</h1>
-        </div>
 
         {/* Sidebar Content */}
         <div className='sidebar__content'>
@@ -130,15 +125,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isVisible }) => {
                 <span className='sidebar__link-name'>{link.name}</span>
               </Link>
             ))}
-          </div>
-        </div>
-
-        {/* User Account Info */}
-        <div className='sidebar__account'>
-          <IconUserCheck stroke={2} />
-          <div className='sidebar__names'>
-            <h3 className='sidebar__name'>Ilix</h3>
-            <span className='sidebar__email'>ilixhazarika@email.com</span>
           </div>
         </div>
       </nav>
