@@ -1,19 +1,20 @@
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Signup from "./pages/Auth/Signup";
 import LoginPage from "./pages/Auth/LoginPage";
-import PrivateRoute from "./components/PrivateRoute";
-
+import Logout from "./pages/General/Logout";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
-import Questions from "./pages/QuestionDeck/Questions";
+
+import PrivateRoute from "./components/PrivateRoute";
 import CreateQuestion from "./pages/CreateQuestion/CreateQuestion";
 import Profile from "./pages/Profile/Profile";
 import Admin from "./ilix";
-import "./App.css";
+
 import Layout from "./components/layout";
 import Home from "./pages/Home/Home";
 import MyWallet from "./pages/Transactions/MyWallet";
 import Notifications from "./pages/General/Notifications";
-import Logout from "./pages/General/Logout";
+import QuestionsDeck from "./pages/QuestionDeck/QuestionsDeck";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
         >
           {/* Nested routes within the layout */}
           <Route index element={<Home />} />
-          <Route path='/questions-deck' element={<Questions />} />
+          <Route path='/questions-deck' element={<QuestionsDeck />} />
           <Route path='/create-question' element={<CreateQuestion />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/mywallet' element={<MyWallet />} />

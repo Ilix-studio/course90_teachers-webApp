@@ -143,7 +143,6 @@ input[type="checkbox"] {
 /* Track */
 .cl-switch > span::before {
   content: "";
-  float: right;
   display: inline-block;
   margin: 5px 0 5px 10px;
   border-radius: 7px;
